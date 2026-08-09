@@ -19,9 +19,12 @@ repositories {
 }
 
 dependencies {
-    implementation 'org.springframework.boot:spring-boot-starter'
-    testImplementation 'org.springframework.boot:spring-boot-starter-test'
-    testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+    implementation 'org.springframework.boot:spring-boot-starter-web'        // REST API와 내장 웹 서버를 사용하기 위한 Spring MVC 의존성
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'   // JPA를 이용해 엔티티를 관계형 데이터베이스에 저장하기 위한 의존성
+    implementation 'org.springframework.boot:spring-boot-starter-validation' // 요청 DTO의 필수값, 길이 등을 검증하기 위한 의존성
+    runtimeOnly 'com.h2database:h2'                                          // 개발 단계에서 별도 설치 없이 사용할 수 있는 인메모리 데이터베이스
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'   // JUnit과 Spring Boot 테스트 도구
+    testRuntimeOnly 'org.junit.platform:junit-platform-launcher'             // JUnit Platform에서 테스트를 실행하기 위한 런처
 }
 
 tasks.named('test') {
