@@ -25,6 +25,12 @@ dependencies {
     runtimeOnly 'com.h2database:h2'                                          // 개발 단계에서 별도 설치 없이 사용할 수 있는 인메모리 데이터베이스
     testImplementation 'org.springframework.boot:spring-boot-starter-test'   // JUnit과 Spring Boot 테스트 도구
     testRuntimeOnly 'org.junit.platform:junit-platform-launcher'             // JUnit Platform에서 테스트를 실행하기 위한 런처
+
+    compileOnly 'org.projectlombok:lombok'                                    // Lombok(컴파일 시 적용)
+    annotationProcessor 'org.projectlombok:lombok'                            // Lombok 애노테이션 처리
+
+    testCompileOnly 'org.projectlombok:lombok'
+    testAnnotationProcessor 'org.projectlombok:lombok'
 }
 
 tasks.named('test') {
