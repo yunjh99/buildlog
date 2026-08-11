@@ -2,6 +2,7 @@
 .project-links { display: flex; gap: 16px; flex-wrap: wrap; margin-top: 4px; }
 .project-github { display: inline-block; border-bottom: 1px solid rgba(0,122,94,.35); color: var(--green); font: 11px 'JetBrains Mono',monospace; letter-spacing: .05em; }
 .project-github:hover { border-color: var(--green); }
+.project-card p { white-space: pre-wrap; }
 .project-footer time { flex-shrink: 0; white-space: nowrap; }
 .edit-modal { position: fixed; z-index: 100; inset: 0; display: grid; place-items: center; padding: 24px; background: rgba(28,25,23,.48); backdrop-filter: blur(5px); }
 .edit-modal-panel { width: min(960px,100%); max-height: calc(100vh - 48px); overflow-y: auto; padding: 34px; border: 1px solid var(--line); background: var(--paper); box-shadow: 0 24px 80px rgba(28,25,23,.22); }
