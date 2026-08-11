@@ -1,0 +1,137 @@
+.portfolio-shell main {
+  display: flex;
+  flex-direction: column;
+}
+
+.portfolio-shell .content-section {
+  position: relative;
+  width: 100%;
+  border-top: 0;
+}
+
+.portfolio-shell .content-section::before {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: 100vw;
+  border-top: 1px solid var(--line);
+  transform: translateX(-50%);
+  content: '';
+}
+
+.portfolio-shell #about::before {
+  display: none;
+}
+
+.portfolio-shell .hero { order: 1; }
+.portfolio-shell #about { order: 2; }
+.portfolio-shell .career-display { order: 3; }
+.portfolio-shell .education-display { order: 4; }
+.portfolio-shell .certification-display { order: 5; }
+.portfolio-shell #projects { order: 6; }
+.portfolio-shell .tech-stack-section { order: 7; }
+.portfolio-shell #manage { order: 8; }
+.portfolio-shell .career-manage { order: 9; }
+.portfolio-shell .education-manage { order: 10; }
+.portfolio-shell .certification-manage { order: 11; }
+.portfolio-shell .profile-editor { order: 12; }
+
+.stack-showcase { display: grid; border-top: 1px solid var(--line); }
+.stack-showcase article { display: grid; grid-template-columns: 190px 1fr; gap: 32px; align-items: start; min-height: 118px; padding: 32px 24px; border-bottom: 1px solid var(--line); }
+.stack-showcase h3 { margin: 3px 0 0; color: var(--ink); font: 500 15px 'JetBrains Mono',monospace; letter-spacing: 0; text-align: right; text-transform: none; }
+.stack-showcase article > div { display: flex; flex-wrap: wrap; gap: 9px; }
+.stack-showcase article span { padding: 7px 11px; border: 1px solid rgba(0,122,94,.24); border-radius: 999px; background: rgba(255,255,255,.58); color: var(--ink); font: 13px 'JetBrains Mono',monospace; }
+
+.portfolio-shell:not(.admin-mode) #manage,
+.portfolio-shell:not(.admin-mode) .topbar a[href="#manage"],
+.portfolio-shell:not(.admin-mode) .hero-actions a[href="#manage"] {
+  display: none;
+}
+
+.career-list { border-top: 1px solid var(--line); }
+.modal-description { margin: -12px 0 24px; color: var(--copy); line-height: 1.7; }
+.career-card { display: grid; grid-template-columns: 260px 1fr; gap: 42px; padding: 34px 16px; border-bottom: 1px solid var(--line); }
+.career-card:last-of-type { border-bottom: 0; }
+.career-company h3 { margin: 0 0 10px; font-size: 27px; }
+.career-company time { color: var(--green); font: 13px 'JetBrains Mono', monospace; }
+.career-actions { display: flex; gap: 7px; margin-top: 16px; }
+.career-actions button,.career-cancel { padding: 6px 10px; border: 1px solid var(--line); background: transparent; color: var(--green); font: 10px 'JetBrains Mono',monospace; }
+.career-actions button:last-child { color: #a24c3d; }
+.career-form .career-cancel { width: 100%; }
+.career-roles { display: grid; gap: 28px; }
+.career-role h4 { margin: 0 0 12px; font-size: 19px; font-weight: 500; }
+.career-role ul { display: grid; gap: 8px; margin: 0; padding: 0; list-style: none; }
+.career-role li { position: relative; padding-left: 17px; color: var(--copy); font-size: 16px; line-height: 1.7; }
+.career-role li::before { position: absolute; top: 0; left: 0; color: var(--green); content: '—'; }
+
+.career-role-editor {
+  display: grid;
+  gap: 12px;
+}
+
+.career-editor-heading,
+.career-role-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.career-editor-heading {
+  color: var(--muted);
+  font: 11px 'JetBrains Mono', monospace;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+}
+
+.career-editor-heading button,
+.career-add-activity,
+.career-remove {
+  border: 0;
+  background: transparent;
+  color: var(--green);
+  font-size: 11px;
+}
+
+.career-role-editor fieldset {
+  display: grid;
+  gap: 12px;
+  margin: 0;
+  padding: 16px;
+  border: 1px solid var(--line);
+}
+
+.career-role-heading input {
+  flex: 1;
+  font-weight: 500;
+}
+
+.career-activity-editor {
+  display: grid;
+  gap: 8px;
+  padding-left: 18px;
+}
+
+.career-activity-editor > div {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 6px;
+}
+
+.career-form .career-remove {
+  width: auto;
+  padding: 6px;
+  color: #a24c3d;
+  white-space: nowrap;
+}
+
+.career-add-activity {
+  justify-self: start;
+}
+
+@media(max-width:720px) {
+  .stack-showcase article { grid-template-columns: 1fr; gap: 16px; padding: 26px 0; }
+  .stack-showcase h3 { text-align: left; }
+  .career-card { grid-template-columns: 1fr; gap: 24px; }
+  .career-activity-editor { padding-left: 0; }
+}

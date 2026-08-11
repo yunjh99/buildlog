@@ -1,0 +1,31 @@
+.side-navigation {
+  position: fixed;
+  z-index: 18;
+  top: 50%;
+  right: 22px;
+  display: grid;
+  width: 128px;
+  transform: translateY(-50%);
+}
+
+.side-navigation a {
+  padding: 9px 12px;
+  border: 1px solid transparent;
+  border-radius: 5px;
+  color: var(--muted);
+  font: 12px 'JetBrains Mono', monospace;
+  letter-spacing: .08em;
+  text-align: center;
+  transition: border-color .2s ease, color .2s ease, background .2s ease;
+}
+
+.side-navigation a:hover,
+.side-navigation a.active {
+  border-color: var(--green);
+  background: rgba(255,255,255,.72);
+  color: var(--green);
+}
+
+@media(max-width:1380px) {
+  .side-navigation { display: none; }
+}

@@ -1,0 +1,3 @@
+@import '../../education/components/EducationSection.css';
+.certification-list article{display:grid;grid-template-columns:180px 1fr;gap:42px;padding:28px 16px;border-bottom:1px solid var(--line)}.certification-list h3{margin:0 0 8px}.certification-list p{margin:0;color:var(--copy)}.certification-list a{display:inline-block;margin-top:10px;color:var(--green);font-size:13px}
+@media(max-width:720px){.certification-list article{grid-template-columns:1fr;gap:10px}}
