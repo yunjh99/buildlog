@@ -1,5 +1,6 @@
 .modal-open { overflow: hidden; }
-.project-github { display: inline-block; margin-top: 4px; border-bottom: 1px solid rgba(0,122,94,.35); color: var(--green); font: 11px 'JetBrains Mono',monospace; letter-spacing: .05em; }
+.project-links { display: flex; gap: 16px; flex-wrap: wrap; margin-top: 4px; }
+.project-github { display: inline-block; border-bottom: 1px solid rgba(0,122,94,.35); color: var(--green); font: 11px 'JetBrains Mono',monospace; letter-spacing: .05em; }
 .project-github:hover { border-color: var(--green); }
 .project-footer time { flex-shrink: 0; white-space: nowrap; }
 .edit-modal { position: fixed; z-index: 100; inset: 0; display: grid; place-items: center; padding: 24px; background: rgba(28,25,23,.48); backdrop-filter: blur(5px); }

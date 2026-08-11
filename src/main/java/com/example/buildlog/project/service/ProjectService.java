@@ -51,7 +51,8 @@ public class ProjectService {
                 request.type(),
                 request.teamSize(),
                 request.description(),
-                request.githubUrl()
+                request.githubUrl(),
+                request.siteUrl()
         );
 
         // 로그인된 사용자 정보를 기반으로 사용자 조회
@@ -96,7 +97,8 @@ public class ProjectService {
                 request.type(),
                 request.teamSize(),
                 request.description(),
-                request.githubUrl()
+                request.githubUrl(),
+                request.siteUrl()
         );
         project.clearTechStacks();
         project.clearContributions();

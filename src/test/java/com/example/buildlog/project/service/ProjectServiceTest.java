@@ -67,6 +67,7 @@ class ProjectServiceTest {
                 3,
                 "개발 프로젝트와 경력을 관리하는 서비스",
                 "https://github.com/example/buildlog",
+                "https://buildlog.example.com",
                 List.of(
                         new ProjectTechStackRequest(java.getId(), 1),
                         new ProjectTechStackRequest(springBoot.getId(), 2)
@@ -94,6 +95,8 @@ class ProjectServiceTest {
         assertThat(savedProject.getName()).isEqualTo("BuildLog");
         assertThat(savedProject.getType()).isEqualTo(ProjectType.TEAM);
         assertThat(savedProject.getTeamSize()).isEqualTo(3);
+        assertThat(savedProject.getGithubUrl()).isEqualTo("https://github.com/example/buildlog");
+        assertThat(savedProject.getSiteUrl()).isEqualTo("https://buildlog.example.com");
         assertThat(savedProject.getTechStacks())
                 .hasSize(2)
                 .extracting(projectTechStack -> projectTechStack.getTechStack().getName())
@@ -220,6 +223,7 @@ class ProjectServiceTest {
                 null,
                 "테스트 설명",
                 null,
+                null,
                 techStackRequests,
                 List.of()
         );
@@ -244,6 +248,7 @@ class ProjectServiceTest {
                 type,
                 teamSize,
                 "테스트 설명",
+                null,
                 null,
                 techStacks,
                 List.of()

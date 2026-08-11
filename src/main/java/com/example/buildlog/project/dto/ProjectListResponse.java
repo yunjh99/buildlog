@@ -16,6 +16,7 @@ public record ProjectListResponse(
         Integer teamSize,
         String description,
         String githubUrl,
+        String siteUrl,
         List<TechStackResponse> techStacks,
         List<ProjectContributionResponse> contributions
 ) {
@@ -38,6 +39,7 @@ public record ProjectListResponse(
                 project.getTeamSize(),
                 project.getDescription(),
                 project.getGithubUrl(),
+                project.getSiteUrl(),
                 techStackResponses,
                 contributions
         );
