@@ -30,7 +30,11 @@ docker compose ps
 docker compose logs -f backend
 ```
 
-Open `http://SERVER_PUBLIC_IP`. The admin page is available at `/admin`.
+After the `yunjh.kr` and `www.yunjh.kr` DNS A records point to the server, open
+`https://yunjh.kr`. The admin page is available at `/admin`.
+
+Caddy obtains and renews the HTTPS certificate automatically. Keep inbound TCP
+ports 80 and 443 open, and persist the `caddy-data` volume.
 
 ## Update
 
