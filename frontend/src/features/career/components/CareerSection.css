@@ -25,9 +25,9 @@
 
 .portfolio-shell .hero { order: 1; }
 .portfolio-shell #about { order: 2; }
-.portfolio-shell .tech-stack-section { order: 3; }
-.portfolio-shell .career-display { order: 4; }
-.portfolio-shell #projects { order: 5; }
+.portfolio-shell .career-display { order: 3; }
+.portfolio-shell #projects { order: 4; }
+.portfolio-shell .tech-stack-section { order: 5; }
 .portfolio-shell .education-display { order: 6; }
 .portfolio-shell .certification-display { order: 7; }
 .portfolio-shell #manage { order: 8; }

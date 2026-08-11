@@ -3,9 +3,9 @@ import './SideNavigation.css'
 
 const items = [
   ['introduce', 'INTRODUCE'],
-  ['tech-stack', 'SKILL'],
   ['career', 'EXPERIENCE'],
   ['projects', 'PROJECT'],
+  ['tech-stack', 'SKILL'],
   ['education', 'EDUCATION'],
   ['certifications', 'CERTIFICATIONS'],
 ]
