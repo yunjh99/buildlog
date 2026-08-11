@@ -83,8 +83,6 @@ export default function PortfolioApp({ isAdmin = false, onLogout }) {
         <span className="section-number">// ABOUT</span><div className="section-grid"><h2>{profile.aboutTitle}<br/><em>{profile.aboutEmphasis}</em></h2><div><p className="about-content">{[profile.aboutParagraph1, profile.aboutParagraph2].filter(Boolean).join('\n\n')}</p><div className="stats"><span><b>{projects.length}</b>projects</span><span><b>{tags.length}</b>technologies</span><span><b>EXPERIENCE</b>B2B SERVICE</span></div></div></div>
       </section>
 
-      <TechStackShowcase />
-
       <section className="content-section" id="projects">
         <span className="section-number">// PROJECTS</span><div className="section-title"><h2>프로젝트</h2><div className="section-title-actions"><small>{String(projects.length).padStart(2, '0')} ENTRIES</small>{isAdmin && <button className="add-entry" onClick={() => setCreatingProject(true)}>+ 프로젝트 추가</button>}</div></div>
         <div className="filters"><button className={activeTag === 'ALL' ? 'active' : ''} onClick={() => setActiveTag('ALL')}>ALL ({projects.length})</button>{tags.map(tag => <button key={tag} className={activeTag === tag ? 'active' : ''} onClick={() => setActiveTag(tag)}>{tag}</button>)}</div>
@@ -102,6 +100,8 @@ export default function PortfolioApp({ isAdmin = false, onLogout }) {
 
       {editingProject && <ProjectManager project={editingProject} onChanged={() => load()} onClose={() => setEditingProject(null)} />}
       {creatingProject && <ProjectManager project={null} onChanged={() => load()} onClose={() => setCreatingProject(false)} />}
+
+      <TechStackShowcase />
 
       <CareerSection isAdmin={isAdmin}/>
       <EducationSection isAdmin={isAdmin}/>
