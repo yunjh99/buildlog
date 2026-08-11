@@ -43,7 +43,7 @@ trust policy with the 12-digit AWS account ID:
       "Condition": {
         "StringEquals": {
           "token.actions.githubusercontent.com:aud": "sts.amazonaws.com",
-          "token.actions.githubusercontent.com:sub": "repo:yunjh99/buildlog:ref:refs/heads/main"
+          "token.actions.githubusercontent.com:sub": "repo:yunjh99@245484985/buildlog@1328584920:ref:refs/heads/main"
         }
       }
     }
