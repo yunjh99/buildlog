@@ -74,7 +74,7 @@ jobs:
         env:
           INSTANCE_ID: ${{ vars.AWS_INSTANCE_ID }}
         run: |
-          DEPLOY_COMMAND="sudo -u ubuntu -H bash -lc 'set -euo pipefail; cd /home/ubuntu/buildlog; git pull --ff-only origin main; docker compose up -d --build; docker compose ps'"
+          DEPLOY_COMMAND="sudo -u ubuntu -H bash -lc 'set -euo pipefail; exec 9>/tmp/buildlog-deploy.lock; flock -n 9 || { echo Another deployment is already running; exit 1; }; cd /home/ubuntu/buildlog; git pull --ff-only origin main; docker compose build backend; docker compose build web; docker compose up -d; docker compose ps'"
           PARAMETERS=$(jq -n --arg command "$DEPLOY_COMMAND" '{commands: [$command]}')
 
           COMMAND_ID=$(aws ssm send-command \
