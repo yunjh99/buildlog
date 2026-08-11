@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useState } from 'react'
 import { createCertification, deleteCertification, getCertifications, updateCertification } from '../api/certificationApi'
 import EntryModal from '../../../shared/components/EntryModal'
+import { formatMonth } from '../../../shared/utils/date'
 import './CertificationSection.css'
 
 const empty = () => ({ name: '', issuer: '', acquiredDate: '', credentialId: '', credentialUrl: '' })
@@ -21,7 +22,7 @@ export default function CertificationSection({ isAdmin = false }) {
     <span className="section-number">// CERTIFICATIONS</span>
     <div className="section-title"><h2>자격증</h2><div className="section-title-actions"><small>{String(items.length).padStart(2, '0')} ENTRIES</small>{isAdmin && <button className="add-entry" onClick={add}>+ 자격증 추가</button>}</div></div>
     {message && !modalOpen && <div className="notice" role="status">{message}</div>}
-    <div className="certification-list">{items.map(item => <article key={item.id}><time>{item.acquiredDate}</time><div><h3>{item.name}</h3><p>{item.issuer}{item.credentialId && ` · ${item.credentialId}`}</p>{item.credentialUrl && <a href={item.credentialUrl} target="_blank" rel="noreferrer">인증 보기 ↗</a>}{isAdmin && <span className="entry-actions"><button onClick={() => edit(item)}>수정</button><button onClick={() => remove(item)}>삭제</button></span>}</div></article>)}{!items.length && <div className="empty">등록된 자격증이 없습니다.</div>}</div>
+    <div className="certification-list">{items.map(item => <article key={item.id}><time>{formatMonth(item.acquiredDate)}</time><div><h3>{item.name}</h3><p>{item.issuer}{item.credentialId && ` · ${item.credentialId}`}</p>{item.credentialUrl && <a href={item.credentialUrl} target="_blank" rel="noreferrer">인증 보기 ↗</a>}{isAdmin && <span className="entry-actions"><button onClick={() => edit(item)}>수정</button><button onClick={() => remove(item)}>삭제</button></span>}</div></article>)}{!items.length && <div className="empty">등록된 자격증이 없습니다.</div>}</div>
     {modalOpen && <EntryModal eyebrow={editId ? 'CERTIFICATION EDIT' : 'CERTIFICATION ADD'} title={editId ? '자격증 수정' : '자격증 추가'} titleId="certification-modal-title" onClose={close}>
       {message && <div className="notice" role="status">{message}</div>}
       <form className="create-form" onSubmit={submit}><label>자격증명 /<input name="name" value={form.name} onChange={change} required /></label><label>발급기관 /<input name="issuer" value={form.issuer} onChange={change} required /></label><label>취득일 /<input type="date" name="acquiredDate" value={form.acquiredDate} onChange={change} required /></label><label>자격번호 /<input name="credentialId" value={form.credentialId} onChange={change} /></label><label className="wide">인증 URL /<input type="url" name="credentialUrl" value={form.credentialUrl} onChange={change} /></label><button type="button" className="manager-cancel wide" onClick={close}>취소</button><button className="submit wide">{editId ? '자격증 수정 →' : '자격증 저장 →'}</button></form>

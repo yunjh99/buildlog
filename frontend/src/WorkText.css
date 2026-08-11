@@ -318,3 +318,40 @@
     top: 90px;
   }
 }
+
+/* 읽기 편하도록 기존의 옅은 본문·보조 텍스트 대비를 높인다. */
+.portfolio-shell {
+  --ink: #171411;
+  --copy: #403b36;
+  --muted: #6f6861;
+  font-weight: 400;
+}
+
+.portfolio-shell .section-number {
+  color: rgba(0, 122, 94, .78);
+}
+
+.portfolio-shell h1 em,
+.portfolio-shell h2 em {
+  color: rgba(23, 20, 17, .52);
+}
+
+.portfolio-shell .project-index {
+  color: rgba(0, 122, 94, .68);
+}
+
+.contact-links,
+.scroll-indicator,
+.tech-picker > span,
+.tech-option-group > strong,
+.tech-picker small {
+  color: #6f6861;
+}
+
+.work-list span {
+  color: #47423d;
+}
+
+.tech-picker button {
+  color: #5b554f;
+}
