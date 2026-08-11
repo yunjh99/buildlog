@@ -38,3 +38,8 @@ out/
 
 ### Local documentation ###
 /JWT.md
+
+### Deployment secrets ###
+.env
+.env.*
+!.env.example

@@ -32,6 +32,9 @@ public record ProjectCreateRequest(
         @Size(max = 1000, message = "프로젝트 설명은 1,000자 이하여야 합니다.")
         String description,
 
+        @Size(max = 500, message = "GitHub 주소는 500자 이하여야 합니다.")
+        String githubUrl,
+
         @NotNull(message = "기술 스택 목록은 필수입니다.")
         List<@Valid ProjectTechStackRequest> techStacks,
 

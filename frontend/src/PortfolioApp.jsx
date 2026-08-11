@@ -7,7 +7,7 @@ import ProjectManager from './features/project/components/ProjectManager'
 import ProfileEditor from './features/profile/components/ProfileEditor'
 import { getProfile } from './features/profile/api/profileApi'
 import TechStackShowcase from './features/tech-stack/components/TechStackShowcase'
-import { formatMonth } from './shared/utils/date'
+import { formatPeriod } from './shared/utils/date'
 import SideNavigation from './shared/components/SideNavigation'
 import EducationSection from './features/education/components/EducationSection'
 import CertificationSection from './features/certification/components/CertificationSection'
@@ -20,7 +20,7 @@ const defaultProfile = {
   aboutParagraph2: '운영 환경에서는 PostgreSQL과 JavaScript·PHP 기반의 기존 기능을 다루며 데이터 흐름과 비즈니스 로직을 이해했습니다. 프로젝트에서는 Java와 Spring Boot를 중심으로 REST API를 설계하고, JPA를 활용해 도메인과 연관관계를 모델링하며 안정적이고 유지보수하기 좋은 백엔드를 구현해 왔습니다.',
 }
 
-export default function PortfolioApp({ isAdmin = false }) {
+export default function PortfolioApp({ isAdmin = false, onLogout }) {
   const [projects, setProjects] = useState([])
   const [page, setPage] = useState(0)
   const [hasNext, setHasNext] = useState(false)
@@ -70,11 +70,8 @@ export default function PortfolioApp({ isAdmin = false }) {
   }
 
   return <div className={`portfolio-shell${isAdmin ? ' admin-mode' : ''}`}>
-    <header className="topbar">
-      <a className="brand" href="#top">&gt; build.log</a>
-      <nav><a href="#about">소개</a><a href="#career">이력</a><a href="#education">교육</a><a href="#projects">프로젝트</a><a href="#tech-stack">기술</a></nav>
-    </header>
     <SideNavigation />
+    {isAdmin && <button type="button" className="admin-logout-button" onClick={onLogout}>로그아웃</button>}
     <main id="top">
       <section className="hero grid-bg" id="introduce">
         <div className="hero-glow"/><div className="hero-content"><span className="section-number">// BACKEND DEVELOPER</span><h1><em>안녕하세요,</em><br/><span className="hero-name">개발자 윤정환입니다.</span></h1><p className="terminal"><b>$</b> backend developer<span>_</span></p><p className="hero-copy">{profile.heroLine1}<br/>{profile.heroLine2}</p><div className="contact-links" aria-label="연락처">{profile.email ? <a href={`mailto:${profile.email}`}>EMAIL ↗</a> : <span>EMAIL ↗</span>}{profile.githubUrl ? <a href={profile.githubUrl} target="_blank" rel="noreferrer">GITHUB ↗</a> : <span>GITHUB ↗</span>}{profile.blogUrl ? <a href={profile.blogUrl} target="_blank" rel="noreferrer">BLOG ↗</a> : <span>BLOG ↗</span>}</div><div className="hero-actions"><a className="button ghost" href="#about">소개</a><a className="button ghost" href="#career">이력</a><a className="button primary" href="#projects">프로젝트</a></div></div>
@@ -96,8 +93,9 @@ export default function PortfolioApp({ isAdmin = false }) {
           <span className="project-index">{String(index + 1).padStart(2, '0')}</span>
           <div><div className="project-heading"><h3>{project.name}</h3><div className="project-card-tools"><small>{project.type === 'TEAM' ? `팀 프로젝트${project.teamSize ? ` · ${project.teamSize}명` : ''}` : '개인 프로젝트'}</small>{isAdmin && <div className="project-actions"><button type="button" onClick={() => setEditingProject(project)}>수정</button><button type="button" onClick={() => removeProject(project)}>삭제</button></div>}</div></div>
           <p>{project.description || '프로젝트에 대한 설명이 아직 등록되지 않았습니다.'}</p>
+          {project.githubUrl && <a className="project-github" href={project.githubUrl} target="_blank" rel="noreferrer">GitHub 저장소 ↗</a>}
           {project.contributions?.length > 0 && <div className="work-list">{project.contributions.map(item => <div key={item.id ?? item.title}><strong>{item.title}</strong>{item.detail && <span>{item.detail}</span>}</div>)}</div>}
-          <div className="project-footer"><div className="tags">{project.techStacks?.map(tech => { const name = typeof tech === 'string' ? tech : tech.name; return <button key={typeof tech === 'string' ? tech : tech.id} onClick={() => setActiveTag(name)}>{name}</button> })}</div><time>{formatMonth(project.startDate)} ~ {project.endDate ? formatMonth(project.endDate) : '진행 중'}</time></div></div>
+          <div className="project-footer"><div className="tags">{project.techStacks?.map(tech => { const name = typeof tech === 'string' ? tech : tech.name; return <button key={typeof tech === 'string' ? tech : tech.id} onClick={() => setActiveTag(name)}>{name}</button> })}</div><time>{formatPeriod(project.startDate, project.endDate)}</time></div></div>
         </article>)}{!loading && visible.length === 0 && <div className="empty">표시할 프로젝트가 없습니다.</div>}</div>
         {loading && <div className="empty">프로젝트를 불러오는 중...</div>}{hasNext && !loading && <button className="more" onClick={() => load(page + 1, true)}>더보기 ↓</button>}
       </section>

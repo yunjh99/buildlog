@@ -50,7 +50,8 @@ public class ProjectService {
                 request.endDate(),
                 request.type(),
                 request.teamSize(),
-                request.description()
+                request.description(),
+                request.githubUrl()
         );
 
         // 로그인된 사용자 정보를 기반으로 사용자 조회
@@ -94,7 +95,8 @@ public class ProjectService {
                 request.endDate(),
                 request.type(),
                 request.teamSize(),
-                request.description()
+                request.description(),
+                request.githubUrl()
         );
         project.clearTechStacks();
         project.clearContributions();

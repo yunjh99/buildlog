@@ -62,6 +62,9 @@ public class Project {
     @Column(columnDefinition = "TEXT")
     private String description;
 
+    @Column(length = 500)
+    private String githubUrl;
+
     // 프로젝트에서 담당한 작업을 화면에 표시할 순서대로 관리한다.
     @OneToMany(
             mappedBy = "project",
@@ -83,7 +86,8 @@ public class Project {
             LocalDate endDate,
             ProjectType type,
             Integer teamSize,
-            String description
+            String description,
+            String githubUrl
     ) {
         validateTeamSize(type, teamSize);
         this.name = name;
@@ -92,6 +96,7 @@ public class Project {
         this.type = type;
         this.teamSize = teamSize;
         this.description = description;
+        this.githubUrl = githubUrl;
     }
 
     public void update(
@@ -100,7 +105,8 @@ public class Project {
             LocalDate endDate,
             ProjectType type,
             Integer teamSize,
-            String description
+            String description,
+            String githubUrl
     ) {
         validateTeamSize(type, teamSize);
         this.name = name;
@@ -109,6 +115,7 @@ public class Project {
         this.type = type;
         this.teamSize = teamSize;
         this.description = description;
+        this.githubUrl = githubUrl;
     }
 
     private void validateTeamSize(ProjectType type, Integer teamSize) {

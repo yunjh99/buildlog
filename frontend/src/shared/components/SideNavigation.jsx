@@ -3,11 +3,11 @@ import './SideNavigation.css'
 
 const items = [
   ['introduce', 'INTRODUCE'],
+  ['tech-stack', 'SKILL'],
   ['career', 'EXPERIENCE'],
+  ['projects', 'PROJECT'],
   ['education', 'EDUCATION'],
   ['certifications', 'CERTIFICATIONS'],
-  ['projects', 'PROJECT'],
-  ['tech-stack', 'SKILL'],
 ]
 
 export default function SideNavigation() {

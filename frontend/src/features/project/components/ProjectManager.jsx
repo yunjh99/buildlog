@@ -11,6 +11,7 @@ const toForm = project => ({
   type: project?.type ?? 'PERSONAL',
   teamSize: project?.teamSize ?? '',
   description: project?.description ?? '',
+  githubUrl: project?.githubUrl ?? '',
   techStackIds: project?.techStacks?.map(tech => tech.id) ?? [],
   contributions: project?.contributions?.map(item => ({ title: item.title, detail: item.detail ?? '' })) ?? [{ title: '', detail: '' }],
 })
@@ -54,6 +55,7 @@ export default function ProjectManager({ project, onChanged, onClose }) {
       endDate: form.endDate || null,
       teamSize: form.type === 'TEAM' ? Number(form.teamSize) : null,
       description: form.description || null,
+      githubUrl: form.githubUrl || null,
       techStacks: form.techStackIds.map((techStackId, index) => ({ techStackId, displayOrder: index + 1 })),
       contributions: form.contributions.filter(item => item.title.trim()).map((item, index) => ({
         title: item.title,
@@ -88,6 +90,7 @@ export default function ProjectManager({ project, onChanged, onClose }) {
       <label>유형 /<select name="type" value={form.type} onChange={change}><option value="PERSONAL">개인</option><option value="TEAM">팀</option></select></label>
       {form.type === 'TEAM' && <label>팀 인원 /<input type="number" name="teamSize" value={form.teamSize} min="2" onChange={change} required /></label>}
       <label className="wide">설명 /<textarea name="description" value={form.description} onChange={change} rows="4" maxLength="1000" /></label>
+      <label className="wide">GitHub 주소 /<input type="url" name="githubUrl" value={form.githubUrl} onChange={change} maxLength="500" placeholder="https://github.com/username/repository" /></label>
       <TechStackSelector value={form.techStackIds} onChange={techStackIds => setForm(current => ({ ...current, techStackIds }))} />
       <div className="wide work-editor">
         <div className="editor-title"><span>주요 작업 /</span><button type="button" onClick={() => setForm(current => ({ ...current, contributions: [...current.contributions, { title: '', detail: '' }] }))}>+ 작업 추가</button></div>

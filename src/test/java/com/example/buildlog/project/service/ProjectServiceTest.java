@@ -66,6 +66,7 @@ class ProjectServiceTest {
                 ProjectType.TEAM,
                 3,
                 "개발 프로젝트와 경력을 관리하는 서비스",
+                "https://github.com/example/buildlog",
                 List.of(
                         new ProjectTechStackRequest(java.getId(), 1),
                         new ProjectTechStackRequest(springBoot.getId(), 2)
@@ -218,6 +219,7 @@ class ProjectServiceTest {
                 ProjectType.PERSONAL,
                 null,
                 "테스트 설명",
+                null,
                 techStackRequests,
                 List.of()
         );
@@ -242,6 +244,7 @@ class ProjectServiceTest {
                 type,
                 teamSize,
                 "테스트 설명",
+                null,
                 techStacks,
                 List.of()
         );
