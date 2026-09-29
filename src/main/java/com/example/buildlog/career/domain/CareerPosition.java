@@ -16,53 +16,59 @@ import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
 @Entity
-@Table(name = "career_roles") // Existing section rows retain their IDs and activity references.
+@Table(name = "career_positions")
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class CareerSection {
+public class CareerPosition {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "position_id", nullable = false)
-    private CareerPosition position;
+    @JoinColumn(name = "career_id", nullable = false)
+    private Career career;
 
-    @Column(nullable = false, length = 100)
+    @Column(length = 100)
     private String title;
+
+    @Column(nullable = false)
+    private LocalDate startDate;
+
+    private LocalDate endDate;
 
     @Column(nullable = false)
     private Integer displayOrder;
 
-    @OneToMany(
-            mappedBy = "section",
-            cascade = CascadeType.ALL,
-            orphanRemoval = true
-    )
+    @OneToMany(mappedBy = "position", cascade = CascadeType.ALL, orphanRemoval = true)
     @OrderBy("displayOrder ASC")
-    private List<CareerActivity> activities = new ArrayList<>();
+    private List<CareerSection> sections = new ArrayList<>();
 
-    CareerSection(CareerPosition position, String title, int displayOrder) {
-        this.position = position;
+    CareerPosition(Career career, String title, LocalDate startDate, LocalDate endDate, int displayOrder) {
+        this.career = career;
         this.title = title;
+        this.startDate = startDate;
+        this.endDate = endDate;
         this.displayOrder = displayOrder;
     }
 
-    public void addActivity(String content, int displayOrder) {
-        activities.add(new CareerActivity(this, content, displayOrder));
+    public CareerSection addSection(String title, int displayOrder) {
+        CareerSection section = new CareerSection(this, title, displayOrder);
+        sections.add(section);
+        return section;
     }
 
-    public void clearActivities() {
-        activities.clear();
+    public void clearSections() {
+        sections.clear();
     }
 
-    public List<CareerActivity> getActivities() {
-        return Collections.unmodifiableList(activities);
+    public List<CareerSection> getSections() {
+        return Collections.unmodifiableList(sections);
     }
 }

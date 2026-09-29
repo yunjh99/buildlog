@@ -10,7 +10,7 @@ public record CareerResponse(
         String companyName,
         LocalDate startDate,
         LocalDate endDate,
-        List<CareerRoleResponse> roles
+        List<CareerPositionResponse> positions
 ) {
     public static CareerResponse from(Career career) {
         return new CareerResponse(
@@ -18,7 +18,7 @@ public record CareerResponse(
                 career.getCompanyName(),
                 career.getStartDate(),
                 career.getEndDate(),
-                career.getRoles().stream().map(CareerRoleResponse::from).toList()
+                career.getPositions().stream().map(CareerPositionResponse::from).toList()
         );
     }
 }

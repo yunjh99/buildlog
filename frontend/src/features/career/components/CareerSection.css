@@ -58,19 +58,25 @@
 .career-actions button,.career-cancel { padding: 6px 10px; border: 1px solid var(--line); background: transparent; color: var(--green); font: 10px 'JetBrains Mono',monospace; }
 .career-actions button:last-child { color: #a24c3d; }
 .career-form .career-cancel { width: 100%; }
-.career-roles { display: grid; gap: 28px; }
-.career-role h4 { margin: 0 0 12px; font-size: 19px; font-weight: 500; }
-.career-role ul { display: grid; gap: 8px; margin: 0; padding: 0; list-style: none; }
-.career-role li { position: relative; padding-left: 17px; color: var(--copy); font-size: 16px; line-height: 1.7; }
-.career-role li::before { position: absolute; top: 0; left: 0; color: var(--green); content: '—'; }
+.career-positions { display: grid; gap: 32px; }
+.career-position + .career-position { border-top: 1px solid var(--line); padding-top: 28px; }
+.career-position h4 { margin: 0 0 8px; font-size: 19px; font-weight: 500; }
+.career-position > time { color: var(--green); font: 13px 'JetBrains Mono', monospace; }
+.career-sections { display: grid; gap: 24px; margin-top: 18px; }
+.career-section h5 { margin: 0 0 12px; font-size: 16px; font-weight: 600; }
+.career-section ul { display: grid; gap: 8px; margin: 0; padding: 0; list-style: none; }
+.career-section li { position: relative; padding-left: 17px; color: var(--copy); font-size: 16px; line-height: 1.7; }
+.career-section li::before { position: absolute; top: 0; left: 0; color: var(--green); content: '—'; }
 
-.career-role-editor {
+.career-position-editor,
+.career-section-editor {
   display: grid;
   gap: 12px;
 }
 
 .career-editor-heading,
-.career-role-heading {
+.career-position-heading,
+.career-section-heading {
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -93,7 +99,8 @@
   font-size: 11px;
 }
 
-.career-role-editor fieldset {
+.career-position-editor fieldset,
+.career-section-fields {
   display: grid;
   gap: 12px;
   margin: 0;
@@ -101,10 +108,13 @@
   border: 1px solid var(--line);
 }
 
-.career-role-heading input {
+.career-section-heading input {
   flex: 1;
   font-weight: 500;
 }
+
+.career-position-dates { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.career-position-dates label { min-width: 0; }
 
 .career-activity-editor {
   display: grid;
@@ -133,5 +143,6 @@
   .stack-showcase article { grid-template-columns: 1fr; gap: 16px; padding: 26px 0; }
   .stack-showcase h3 { text-align: left; }
   .career-card { grid-template-columns: 1fr; gap: 24px; }
+  .career-position-dates { grid-template-columns: 1fr; }
   .career-activity-editor { padding-left: 0; }
 }

@@ -1,11 +1,13 @@
 package com.example.buildlog.career.service;
 
 import com.example.buildlog.career.domain.Career;
+import com.example.buildlog.career.domain.CareerPosition;
 import com.example.buildlog.career.domain.CareerSection;
 import com.example.buildlog.career.dto.CareerActivityRequest;
 import com.example.buildlog.career.dto.CareerCreateRequest;
+import com.example.buildlog.career.dto.CareerPositionRequest;
 import com.example.buildlog.career.dto.CareerResponse;
-import com.example.buildlog.career.dto.CareerRoleRequest;
+import com.example.buildlog.career.dto.CareerSectionRequest;
 import com.example.buildlog.career.repository.CareerRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -31,7 +33,7 @@ public class CareerService {
                 request.endDate()
         );
 
-        addRoles(career, request);
+        addPositions(career, request);
         return careerRepository.save(career).getId();
     }
 
@@ -39,8 +41,8 @@ public class CareerService {
     public void update(Long id, CareerCreateRequest request) {
         Career career = findById(id);
         career.update(request.companyName().trim(), request.startDate(), request.endDate());
-        career.clearRoles();
-        addRoles(career, request);
+        career.clearPositions();
+        addPositions(career, request);
     }
 
     @Transactional
@@ -48,14 +50,22 @@ public class CareerService {
         careerRepository.delete(findById(id));
     }
 
-    private void addRoles(Career career, CareerCreateRequest request) {
-        for (int roleIndex = 0; roleIndex < request.roles().size(); roleIndex++) {
-            CareerRoleRequest roleRequest = request.roles().get(roleIndex);
-            CareerSection role = career.addRole(roleRequest.title().trim(), roleIndex + 1);
+    private void addPositions(Career career, CareerCreateRequest request) {
+        for (int positionIndex = 0; positionIndex < request.positions().size(); positionIndex++) {
+            CareerPositionRequest positionRequest = request.positions().get(positionIndex);
+            String title = positionRequest.title() == null || positionRequest.title().isBlank()
+                    ? null : positionRequest.title().trim();
+            CareerPosition position = career.addPosition(
+                    title, positionRequest.startDate(), positionRequest.endDate(), positionIndex + 1
+            );
 
-            for (int activityIndex = 0; activityIndex < roleRequest.activities().size(); activityIndex++) {
-                CareerActivityRequest activity = roleRequest.activities().get(activityIndex);
-                role.addActivity(activity.content().trim(), activityIndex + 1);
+            for (int sectionIndex = 0; sectionIndex < positionRequest.sections().size(); sectionIndex++) {
+                CareerSectionRequest sectionRequest = positionRequest.sections().get(sectionIndex);
+                CareerSection section = position.addSection(sectionRequest.title().trim(), sectionIndex + 1);
+                for (int activityIndex = 0; activityIndex < sectionRequest.activities().size(); activityIndex++) {
+                    CareerActivityRequest activity = sectionRequest.activities().get(activityIndex);
+                    section.addActivity(activity.content().trim(), activityIndex + 1);
+                }
             }
         }
     }

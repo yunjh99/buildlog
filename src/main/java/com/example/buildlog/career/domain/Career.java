@@ -38,7 +38,7 @@ public class Career {
 
     @OneToMany(mappedBy = "career", cascade = CascadeType.ALL, orphanRemoval = true)
     @OrderBy("displayOrder ASC")
-    private List<CareerSection> roles = new ArrayList<>();
+    private List<CareerPosition> positions = new ArrayList<>();
 
     public Career(String companyName, LocalDate startDate, LocalDate endDate) {
         this.companyName = companyName;
@@ -52,17 +52,17 @@ public class Career {
         this.endDate = endDate;
     }
 
-    public void clearRoles() {
-        roles.clear();
+    public void clearPositions() {
+        positions.clear();
     }
 
-    public CareerSection addRole(String title, int displayOrder) {
-        CareerSection role = new CareerSection(this, title, displayOrder);
-        roles.add(role);
-        return role;
+    public CareerPosition addPosition(String title, LocalDate startDate, LocalDate endDate, int displayOrder) {
+        CareerPosition position = new CareerPosition(this, title, startDate, endDate, displayOrder);
+        positions.add(position);
+        return position;
     }
 
-    public List<CareerSection> getRoles() {
-        return Collections.unmodifiableList(roles);
+    public List<CareerPosition> getPositions() {
+        return Collections.unmodifiableList(positions);
     }
 }
