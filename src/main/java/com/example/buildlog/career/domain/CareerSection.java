@@ -21,10 +21,10 @@ import java.util.Collections;
 import java.util.List;
 
 @Entity
-@Table(name = "career_roles")
+@Table(name = "career_roles") // 실DB 테이블명은 그대로 유지
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class CareerRole {
+public class CareerSection {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -40,11 +40,15 @@ public class CareerRole {
     @Column(nullable = false)
     private Integer displayOrder;
 
-    @OneToMany(mappedBy = "role", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(
+            mappedBy = "section",
+            cascade = CascadeType.ALL,
+            orphanRemoval = true
+    )
     @OrderBy("displayOrder ASC")
     private List<CareerActivity> activities = new ArrayList<>();
 
-    CareerRole(Career career, String title, int displayOrder) {
+    CareerSection(Career career, String title, int displayOrder) {
         this.career = career;
         this.title = title;
         this.displayOrder = displayOrder;

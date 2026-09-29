@@ -1,7 +1,7 @@
 package com.example.buildlog.career.service;
 
 import com.example.buildlog.career.domain.Career;
-import com.example.buildlog.career.domain.CareerRole;
+import com.example.buildlog.career.domain.CareerSection;
 import com.example.buildlog.career.dto.CareerActivityRequest;
 import com.example.buildlog.career.dto.CareerCreateRequest;
 import com.example.buildlog.career.dto.CareerResponse;
@@ -51,7 +51,7 @@ public class CareerService {
     private void addRoles(Career career, CareerCreateRequest request) {
         for (int roleIndex = 0; roleIndex < request.roles().size(); roleIndex++) {
             CareerRoleRequest roleRequest = request.roles().get(roleIndex);
-            CareerRole role = career.addRole(roleRequest.title().trim(), roleIndex + 1);
+            CareerSection role = career.addRole(roleRequest.title().trim(), roleIndex + 1);
 
             for (int activityIndex = 0; activityIndex < roleRequest.activities().size(); activityIndex++) {
                 CareerActivityRequest activity = roleRequest.activities().get(activityIndex);

@@ -24,8 +24,8 @@ public class CareerActivity {
     private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "career_role_id", nullable = false)
-    private CareerRole role;
+    @JoinColumn(name = "career_role_id", nullable = false) // DB 컬럼은 그대로
+    private CareerSection section;
 
     @Column(nullable = false, length = 1000)
     private String content;
@@ -33,8 +33,8 @@ public class CareerActivity {
     @Column(nullable = false)
     private Integer displayOrder;
 
-    CareerActivity(CareerRole role, String content, int displayOrder) {
-        this.role = role;
+    CareerActivity(CareerSection section, String content, int displayOrder) {
+        this.section = section;
         this.content = content;
         this.displayOrder = displayOrder;
     }
